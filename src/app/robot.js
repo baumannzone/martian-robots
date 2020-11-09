@@ -33,7 +33,7 @@ class Robot {
 
   move(instructions) {
     for (let i = 0; i < instructions.length; i++) {
-      if (this.position.lost) {
+      if (this.position.getLost()) {
         break
       }
 
@@ -48,21 +48,19 @@ class Robot {
       }
 
       if (isForwardMovement(instruction)) {
-        console.log()
         this.moveForward()
       }
     }
 
-    console.log('POSITION FINAL >>>')
-    console.log(this.position.toString())
     return this.position.toString()
   }
 
   moveForward() {
     const startingPosition = this.position
-    // console.log('POSICION ACTUAL: ', startingPosition)
 
-    if (this.position.lost || this.grid.hasForbiddenPosition(startingPosition)) {
+    // TODO: FIX
+    if (this.position.getLost() || this.grid.hasForbiddenPosition(startingPosition)) {
+      console.log('>>>>')
       return
     }
 
@@ -83,7 +81,6 @@ class Robot {
     }
 
     if (this.position.isOffTheGrid(this.grid)) {
-      console.log(this.grid)
       this.grid.addForbiddenPosition(startingPosition)
     }
   }

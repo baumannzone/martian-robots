@@ -21,8 +21,6 @@ class Grid {
   }
 
   addForbiddenPosition(position) {
-    console.log('POSITION PROHIBIDA <position>')
-    console.log(position)
     this.forbiddenPositions.push(position)
   }
 

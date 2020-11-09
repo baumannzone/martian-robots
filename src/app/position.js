@@ -1,4 +1,4 @@
-const {COORDS, LOST, EMPTY_STRING} = require('../constants')
+const { COORDS, LOST, EMPTY_STRING } = require('../constants')
 
 class Position {
   constructor() {
@@ -14,6 +14,7 @@ class Position {
   }
 
   isOffTheGrid(grid) {
+
     if (this.x > grid.width || this.y > grid.height || this.x < 0 || this.y < 0) {
 
       // Max value for y
@@ -40,7 +41,7 @@ class Position {
     return false
   }
 
-  isLost () {
+  getLost() {
     return this.lost
   }
 }

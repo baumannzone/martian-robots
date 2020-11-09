@@ -1,7 +1,7 @@
 const Grid = require('./grid')
 const Robot = require('./robot')
 
-const {NEWLINE, BLANK_SPACE, EMPTY_STRING, ERRORS} = require('../constants.js')
+const { NEWLINE, BLANK_SPACE, EMPTY_STRING, ERRORS } = require('../constants.js')
 
 class Mars {
   constructor(instructions) {
@@ -10,6 +10,7 @@ class Mars {
     }
     this.output = ''
     this.instructions = instructions.split(NEWLINE)
+    console.log(this.instructions)
   }
 
   sendRobots() {
@@ -19,8 +20,6 @@ class Mars {
 
     let robot = new Robot(grid)
 
-    console.log(robotInstructions)
-
     for (let i = 0; i < robotInstructions.length; i++) {
       const instruction = robotInstructions[i]
 
@@ -28,12 +27,10 @@ class Mars {
       if (this.isNewRobot(instruction)) {
         robot = new Robot(grid)
       }
-
       // Initial position
       else if (this.isRobotStartPosition(instruction)) {
         robot.setPosition(instruction)
       }
-
       // Move robot
       else {
         const move = robot.move(instruction)

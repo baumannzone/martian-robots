@@ -5,4 +5,5 @@ const instructions = '5 3\n1 1 E\nRFRFRFRF\n\n3 2 N\nFRRFLLFFRRFLL\n\n0 3 W\nLLF
 const mars = new Mars(instructions)
 const output = mars.sendRobots()
 
+console.log('***************')
 console.log(output)

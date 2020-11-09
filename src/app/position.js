@@ -13,9 +13,7 @@ class Position {
     return `${this.x} ${this.y} ${this.orientation}${lostText}`
   }
 
-  // Check if the robot is off the grid. If it's set "lost" to true
   isOffTheGrid(grid) {
-
     if (this.x > grid.width || this.y > grid.height || this.x < 0 || this.y < 0) {
 
       // Max value for y
@@ -40,6 +38,10 @@ class Position {
       return this.lost
     }
     return false
+  }
+
+  isLost () {
+    return this.lost
   }
 }
 

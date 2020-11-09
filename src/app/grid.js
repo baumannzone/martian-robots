@@ -16,6 +16,8 @@ class Grid {
   }
 
   addForbiddenPosition(position) {
+    console.log('<<<<<<<<<< bloqueando position >>>>>>>>>>')
+    console.log(position)
     this.forbiddenPositions.push(position)
   }
 

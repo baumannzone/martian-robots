@@ -8,6 +8,7 @@ class Mars {
     if (instructions.length > 100) {
       throw new Error(ERRORS.INSTRUCTION_NO_GREATER_100)
     }
+    this.output = ''
     this.instructions = instructions.split(NEWLINE)
   }
 
@@ -36,12 +37,11 @@ class Mars {
       // Move robot
       else {
         const move = robot.move(instruction)
-        console.log('> Position final: ')
-        console.log(move)
+        this.output += (this.output.length > 0 ? NEWLINE : EMPTY_STRING) + move
       }
     }
 
-    return 'EL RESULTADO'
+    return this.output
   }
 
   isNewRobot(instruction) {

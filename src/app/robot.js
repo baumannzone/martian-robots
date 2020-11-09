@@ -2,8 +2,8 @@ const Position = require('./position')
 const {BLANK_SPACE, INSTRUCTIONS, COORDS} = require('../constants.js')
 
 //-----------
-const isRightTurn = (instruction) => instruction === INSTRUCTIONS.RIGHT
 const isLeftTurn = (instruction) => instruction === INSTRUCTIONS.LEFT
+const isRightTurn = (instruction) => instruction === INSTRUCTIONS.RIGHT
 const isForwardMovement = (instruction) => instruction === INSTRUCTIONS.FORWARD
 
 //-----------
@@ -16,9 +16,9 @@ const right = {
 
 const left = {
   [COORDS.NORTH]: COORDS.WEST,
-  [COORDS.EAST]: COORDS.SOUTH,
+  [COORDS.WEST]: COORDS.SOUTH,
   [COORDS.SOUTH]: COORDS.EAST,
-  [COORDS.WEST]: COORDS.NORTH
+  [COORDS.EAST]: COORDS.NORTH
 }
 
 class Robot {
@@ -27,17 +27,26 @@ class Robot {
     this.position = new Position()
   }
 
+  getPosition() {
+    return this.position
+  }
+
   setPosition(startingPosition) {
+    console.log('<<<<<<<startingPosition>>>>>>>')
+    console.log(startingPosition)
     const [x, y, orientation] = startingPosition.split(BLANK_SPACE)
     this.position.x = x
     this.position.y = y
     this.position.orientation = orientation
-    console.log('<<<startingPosition>>>')
-    console.log(startingPosition)
   }
 
   move(instructions) {
     for (let i = 0; i < instructions.length; i++) {
+
+      if (this.position.lost) {
+        break
+      }
+
       // Current instruction
       const instruction = instructions.charAt(i)
 
@@ -97,6 +106,10 @@ class Robot {
     if (this.position.isOffTheGrid(this.grid)) {
       this.grid.addForbiddenPosition(startingPosition)
     }
+  }
+
+  isLost() {
+    return this.position.lost
   }
 
 }

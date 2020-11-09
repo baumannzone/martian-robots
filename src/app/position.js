@@ -10,7 +10,7 @@ class Position {
 
   toString() {
     const lostText = this.lost ? ` ${LOST}` : EMPTY_STRING
-    return `${this.x} ${this.y} ${this.orientation} ${lostText}`
+    return `${this.x} ${this.y} ${this.orientation}${lostText}`
   }
 
   // Check if the robot is off the grid. If it's set "lost" to true
@@ -40,10 +40,6 @@ class Position {
       return this.lost
     }
     return false
-  }
-
-  getLost () {
-    return this.lost
   }
 }
 

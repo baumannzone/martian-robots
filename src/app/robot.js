@@ -22,6 +22,7 @@ class Robot {
   constructor(grid) {
     this.grid = grid
     this.position = new Position()
+    this.lost = false
   }
 
   setPosition(startingPosition) {

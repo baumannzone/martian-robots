@@ -1,49 +1,62 @@
-const { COORDS, LOST, EMPTY_STRING } = require('../constants')
+const { COORDS } = require('../constants')
 
 class Position {
   constructor() {
-    this.x = 0
-    this.y = 0
-    this.orientation = COORDS.NORTH
-    this.lost = false
+    this._x = 0
+    this._y = 0
+    this._orientation = COORDS.NORTH
   }
 
-  toString() {
-    const lostText = this.lost ? ` ${LOST}` : EMPTY_STRING
-    return `${this.x} ${this.y} ${this.orientation}${lostText}`
+  get x() {
+    return this._x
   }
 
-  isOffTheGrid(grid) {
-
-    if (this.x > grid.width || this.y > grid.height || this.x < 0 || this.y < 0) {
-
-      // Max value for y
-      if (this.orientation === COORDS.NORTH) {
-        this.y = grid.height
-      }
-
-      if (this.orientation === COORDS.SOUTH) {
-        this.y = 0
-      }
-
-      // Max value for x
-      if (this.orientation === COORDS.EAST) {
-        this.x = grid.width
-      }
-
-      if (this.orientation === COORDS.WEST) {
-        this.x = 0
-      }
-
-      this.lost = true
-      return this.lost
-    }
-    return false
+  set x(x) {
+    this._x = x
   }
 
-  getLost() {
-    return this.lost
+  get y() {
+    return this._y
   }
+
+  set y(y) {
+    this._y = y
+  }
+
+  get orientation() {
+    return this._orientation
+  }
+
+  set orientation(orientation) {
+    this._orientation = orientation
+  }
+
+  // isOffTheGrid(grid) {
+  //   if (this.x > grid.width || this.y > grid.height || this.x < 0 || this.y < 0) {
+  //
+  //     // Max value for y
+  //     if (this.orientation === COORDS.NORTH) {
+  //       this.y = grid.height
+  //     }
+  //
+  //     if (this.orientation === COORDS.SOUTH) {
+  //       this.y = 0
+  //     }
+  //
+  //     // Max value for x
+  //     if (this.orientation === COORDS.EAST) {
+  //       this.x = grid.width
+  //     }
+  //
+  //     if (this.orientation === COORDS.WEST) {
+  //       this.x = 0
+  //     }
+  //
+  //     this.lost = true
+  //     return this.lost
+  //   }
+  //   return false
+  // }
 }
 
 module.exports = Position

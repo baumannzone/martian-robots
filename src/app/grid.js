@@ -1,11 +1,6 @@
-const {ERRORS} = require('../constants')
+const { ERRORS } = require('../constants')
 
 class Grid {
-  /**
-   * x, y
-   * @param width {Number} - (x)
-   * @param height {Number} - (y)
-   */
   constructor(width = 0, height = 0) {
     if (width > 50 || height > 50) {
       throw new Error(ERRORS.GRID_NO_GREATER_50)
@@ -24,7 +19,7 @@ class Grid {
     this.forbiddenPositions.push(position)
   }
 
-  hasForbiddenPosition(position) {
+  positionIsForbidden(position) {
     return this.forbiddenPositions.includes(position)
   }
 }

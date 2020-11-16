@@ -1,6 +1,12 @@
 const Mars = require('./app/mars')
 
-const instructions = '5 3\n1 1 E\nRFRFRFRF\n\n3 2 N\nFRRFLLFFRRFLL\n\n0 3 W\nLLFFFLFLFL'
+const instructions = `5 3
+1 1 E
+FRFRFRF
+3 2 N
+FRRFLLFFRRFLL
+0 3 W
+LLFFFLFLFL`
 
 const mars = new Mars(instructions)
 const output = mars.sendRobots()

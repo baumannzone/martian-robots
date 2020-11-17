@@ -10,9 +10,17 @@ class Grid {
       throw new Error(ERRORS.GRID_NO_SMALLER_1)
     }
 
-    this.width = width
-    this.height = height
+    this._width = width
+    this._height = height
     this.forbiddenPositions = []
+  }
+
+  get width () {
+    return this._width
+  }
+
+  get height () {
+    return this._height
   }
 
   addForbiddenPosition(position) {

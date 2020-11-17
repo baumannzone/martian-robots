@@ -24,7 +24,8 @@ const INSTRUCTIONS = {
 const ERRORS = {
   INSTRUCTION_NO_GREATER_100: 'The robot can only receive instruction until 100 characters',
   GRID_NO_GREATER_50: 'Grid size can\'t be greater than 50x50',
-  GRID_NO_SMALLER_1: 'Grid size can\'t be smaller than 1x1'
+  GRID_NO_SMALLER_1: 'Grid size can\'t be smaller than 1x1',
+  INVALID_INSTRUCTION: 'Invalid instruction'
 }
 
 module.exports = {

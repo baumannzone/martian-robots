@@ -1,9 +1,9 @@
 const Position = require('./position')
-const { BLANK_SPACE, INSTRUCTIONS, COORDS } = require('../constants.js')
+const { BLANK_SPACE, INSTRUCTIONS, COORDS, ERRORS } = require('../constants.js')
 
-const isLeftTurn = (instruction) => instruction === INSTRUCTIONS.LEFT
-const isRightTurn = (instruction) => instruction === INSTRUCTIONS.RIGHT
-const isForwardMovement = (instruction) => instruction === INSTRUCTIONS.FORWARD
+// const isLeftTurn = (instruction) => instruction === INSTRUCTIONS.LEFT
+// const isRightTurn = (instruction) => instruction === INSTRUCTIONS.RIGHT
+// const isForwardMovement = (instruction) => instruction === INSTRUCTIONS.FORWARD
 
 const right = {
   [COORDS.NORTH]: COORDS.EAST,
@@ -22,7 +22,7 @@ class Robot {
   constructor(grid) {
     this.grid = grid
     this.position = new Position()
-    this.lost = false
+    this.isLost = false
   }
 
   setPosition(startingPosition) {
@@ -34,22 +34,24 @@ class Robot {
 
   move(instructions) {
     for (let i = 0; i < instructions.length; i++) {
-      if (this.position.getLost()) {
+      if (this.isLost) {
         break
       }
 
       const instruction = instructions.charAt(i)
 
-      if (isLeftTurn(instruction)) {
-        this.turnLeft()
-      }
-
-      if (isRightTurn(instruction)) {
-        this.turnRight()
-      }
-
-      if (isForwardMovement(instruction)) {
-        this.moveForward()
+      switch (instruction) {
+        case INSTRUCTIONS.LEFT:
+          this.turnLeft()
+          break
+        case INSTRUCTIONS.RIGHT:
+          this.turnRight()
+          break
+        case INSTRUCTIONS.FORWARD:
+          this.moveForward()
+          break
+        default:
+          throw new Error(ERRORS.INVALID_INSTRUCTION)
       }
     }
 
@@ -60,25 +62,24 @@ class Robot {
     const startingPosition = this.position
 
     // TODO: FIX
-    if (this.position.getLost() || this.grid.hasForbiddenPosition(startingPosition)) {
-      console.log('>>>>')
-      return
-    }
+    // if (this.position.getLost() || this.grid.hasForbiddenPosition(startingPosition)) {
+    //   console.log('>>>>')
+    //   return
+    // }
 
-    if (this.position.orientation === COORDS.NORTH) {
-      this.position.y++
-    }
-
-    if (this.position.orientation === COORDS.SOUTH) {
-      this.position.y--
-    }
-
-    if (this.position.orientation === COORDS.EAST) {
-      this.position.x++
-    }
-
-    if (this.position.orientation === COORDS.WEST) {
-      this.position.x--
+    switch (this.position.orientation) {
+      case COORDS.NORTH:
+        this.position.y++
+        break
+      case COORDS.SOUTH:
+        this.position.y--
+        break
+      case COORDS.EAST:
+        this.position.x++
+        break
+      case COORDS.WEST:
+        this.position.x--
+        break
     }
 
     if (this.position.isOffTheGrid(this.grid)) {

@@ -13,7 +13,8 @@ const groupRobots = (robots) => {
   robots.forEach((item, index) => {
     if (index === 0 || index % 2 === 0) {
       robot.startingPosition = item
-    } else {
+    }
+    else {
       robot.instructions = item
       robotsGrouped.push(robot)
       robot = {}
@@ -23,55 +24,30 @@ const groupRobots = (robots) => {
 }
 
 class Mars {
-  constructor(instructions) {
+  constructor (instructions) {
     if (instructions.length > 100) {
       throw new Error(ERRORS.INSTRUCTION_NO_GREATER_100)
     }
-    this.output = ''
     this.instructions = instructions.split(NEWLINE)
   }
 
-  sendRobots() {
+  sendRobots () {
     const [gridSize, ...robotInstructions] = this.instructions
     const [gridWidth, gridHeight] = gridSize.split(BLANK_SPACE)
     const grid = new Grid(gridWidth, gridHeight)
 
     const robots = groupRobots(robotInstructions)
 
-    robots.map(robotObj => {
+    let output = ''
+    robots.map((robotObj, idx) => {
       const robot = new Robot(grid)
-      robot.setPosition(robotObj.startingPosition)
-      robot.move(robotObj.instructions)
+      robot.setStartingPosition(robotObj.startingPosition)
+      const move = robot.move(robotObj.instructions)
+      output += (output.length > 0 ? NEWLINE : EMPTY_STRING) + move
     })
-    // let robot = new Robot(grid)
-    // for (let i = 0; i < robotInstructions.length; i++) {
-    //   const instruction = robotInstructions[i]
-    //
-    //   // New robot
-    //   if (this.isNewRobot(instruction)) {
-    //     robot = new Robot(grid)
-    //   }
-    //   // Initial position
-    //   else if (this.isRobotStartPosition(instruction)) {
-    //     robot.setPosition(instruction)
-    //   }
-    //   // Move robot
-    //   else {
-    //     const move = robot.move(instruction)
-    //     this.output += (this.output.length > 0 ? NEWLINE : EMPTY_STRING) + move
-    //   }
-    // }
 
-    return this.output
+    return output
   }
-
-  // isNewRobot(instruction) {
-  //   return instruction === EMPTY_STRING
-  // }
-  //
-  // isRobotStartPosition(instruction) {
-  //   return instruction.includes(BLANK_SPACE)
-  // }
 }
 
 module.exports = Mars

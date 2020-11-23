@@ -1,7 +1,7 @@
 const { ERRORS } = require('../constants')
 
 class Grid {
-  constructor(width = 0, height = 0) {
+  constructor (width = 0, height = 0) {
     if (width > 50 || height > 50) {
       throw new Error(ERRORS.GRID_NO_GREATER_50)
     }
@@ -23,12 +23,12 @@ class Grid {
     return this._height
   }
 
-  addForbiddenPosition(position) {
+  addForbiddenPosition (position) {
     this.forbiddenPositions.push(position)
   }
 
-  positionIsForbidden(position) {
-    return this.forbiddenPositions.includes(position)
+  positionIsForbidden (position) {
+    return this.forbiddenPositions.some(pos => JSON.stringify(position) === JSON.stringify(pos))
   }
 }
 

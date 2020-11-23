@@ -2,7 +2,7 @@ const Mars = require('./app/mars')
 
 const instructions = `5 3
 1 1 E
-FRFRFRF
+RFRFRFRF
 3 2 N
 FRRFLLFFRRFLL
 0 3 W

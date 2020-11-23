@@ -1,10 +1,6 @@
 const Position = require('./position')
 const { BLANK_SPACE, INSTRUCTIONS, COORDS, ERRORS } = require('../constants.js')
 
-// const isLeftTurn = (instruction) => instruction === INSTRUCTIONS.LEFT
-// const isRightTurn = (instruction) => instruction === INSTRUCTIONS.RIGHT
-// const isForwardMovement = (instruction) => instruction === INSTRUCTIONS.FORWARD
-
 const right = {
   [COORDS.NORTH]: COORDS.EAST,
   [COORDS.EAST]: COORDS.SOUTH,
@@ -19,20 +15,20 @@ const left = {
 }
 
 class Robot {
-  constructor(grid) {
+  constructor (grid) {
     this.grid = grid
     this.position = new Position()
     this.isLost = false
   }
 
-  setPosition(startingPosition) {
+  setStartingPosition (startingPosition) {
     const [x, y, orientation] = startingPosition.split(BLANK_SPACE)
     this.position.x = x
     this.position.y = y
     this.position.orientation = orientation
   }
 
-  move(instructions) {
+  move (instructions) {
     for (let i = 0; i < instructions.length; i++) {
       if (this.isLost) {
         break
@@ -55,17 +51,15 @@ class Robot {
       }
     }
 
-    return this.position.toString()
+    return `${this.position.x} ${this.position.y} ${this.position.orientation}${this.isLost ? ' LOST' : ''}`
   }
 
-  moveForward() {
-    const startingPosition = this.position
+  moveForward () {
+    const initialPosition = { x: this.position.x, y: this.position.y, orientation: this.position.orientation }
 
-    // TODO: FIX
-    // if (this.position.getLost() || this.grid.hasForbiddenPosition(startingPosition)) {
-    //   console.log('>>>>')
-    //   return
-    // }
+    if (this.isLost || this.grid.positionIsForbidden(initialPosition)) {
+      return
+    }
 
     switch (this.position.orientation) {
       case COORDS.NORTH:
@@ -83,18 +77,18 @@ class Robot {
     }
 
     if (this.position.isOffTheGrid(this.grid)) {
-      this.grid.addForbiddenPosition(startingPosition)
+      this.isLost = true
+      this.grid.addForbiddenPosition(initialPosition)
     }
   }
 
-  turnRight() {
+  turnRight () {
     this.position.orientation = right[this.position.orientation]
   }
 
-  turnLeft() {
+  turnLeft () {
     this.position.orientation = left[this.position.orientation]
   }
-
 }
 
 module.exports = Robot

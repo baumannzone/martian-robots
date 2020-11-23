@@ -19,7 +19,6 @@ const INSTRUCTIONS = {
   FORWARD: 'F'
 }
 
-
 // Errors
 const ERRORS = {
   INSTRUCTION_NO_GREATER_100: 'The robot can only receive instruction until 100 characters',

@@ -1,30 +1,25 @@
 const { COORDS } = require('../constants')
 
-const isOutsideOfTheGrid = (grid, x, y) => {
-  return x > grid.width || y > grid.height || x < 0 || y < 0
-}
-
 class Position {
-  constructor() {
+  constructor () {
     this._x = 0
     this._y = 0
     this._orientation = COORDS.NORTH
   }
 
-  get x() {
-    console.log('loool XX')
+  get x () {
     return this._x
   }
 
   /**
    * Returns "x" coord
-   * @param x {Number}
+   * @param x {Number} X coord
    */
-  set x(x) {
-    this._x = x
+  set x (x) {
+    this._x = Number(x)
   }
 
-  get y() {
+  get y () {
     return this._y
   }
 
@@ -32,11 +27,11 @@ class Position {
    * Returns "y" coord
    * @param y {Number}
    */
-  set y(y) {
-    this._y = y
+  set y (y) {
+    this._y = Number(y)
   }
 
-  get orientation() {
+  get orientation () {
     return this._orientation
   }
 
@@ -44,33 +39,27 @@ class Position {
    *
    * @param orientation {String}
    */
-  set orientation(orientation) {
+  set orientation (orientation) {
     this._orientation = orientation
   }
 
-  isOffTheGrid(grid) {
+  isOffTheGrid (grid) {
     if (this.x > grid.width || this.y > grid.height || this.x < 0 || this.y < 0) {
-
-      // Max value for y
-      if (this.orientation === COORDS.NORTH) {
-        this.y = grid.height
+      switch (this.orientation) {
+        case COORDS.NORTH:
+          this.y = grid.height
+          break
+        case COORDS.SOUTH:
+          this.y = 0
+          break
+        case COORDS.EAST:
+          this.x = grid.width
+          break
+        case COORDS.WEST:
+          this.x = 0
+          break
       }
-
-      if (this.orientation === COORDS.SOUTH) {
-        this.y = 0
-      }
-
-      // Max value for x
-      if (this.orientation === COORDS.EAST) {
-        this.x = grid.width
-      }
-
-      if (this.orientation === COORDS.WEST) {
-        this.x = 0
-      }
-
-      this.lost = true
-      return this.lost
+      return true
     }
     return false
   }

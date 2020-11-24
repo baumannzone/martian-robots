@@ -3,7 +3,8 @@ module.exports = {
     commonjs: true,
     es2020: true,
     node: true,
-    jest: true
+    jest: true,
+    "jest/globals": true
   },
   extends: [
     'standard'
@@ -13,5 +14,6 @@ module.exports = {
   },
   rules: {
     'brace-style': ['error', 'stroustrup']
-  }
+  },
+  plugins: ['jest']
 }

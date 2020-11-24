@@ -11,5 +11,4 @@ LLFFFLFLFL`
 const mars = new Mars(instructions)
 const output = mars.sendRobots()
 
-console.log('OUTPUT: ')
 console.log(output)

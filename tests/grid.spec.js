@@ -2,19 +2,19 @@ const Grid = require('../src/app/grid.js')
 const { ERRORS } = require('../src/constants')
 
 describe('A Grid', () => {
-  test('with a height greater than 50 (51) should throw an error', () => {
+  test('with a height greater than 50 [51] should throw an error', () => {
     expect(() => {
       new Grid(10, 51)
     }).toThrow(new Error(ERRORS.GRID_NO_GREATER_50))
   })
 
-  test('with a width greater than 50 (51) should throw an error', () => {
+  test('with a width greater than 50 [51] should throw an error', () => {
     expect(() => {
       new Grid(51, 10)
     }).toThrow(new Error(ERRORS.GRID_NO_GREATER_50))
   })
 
-  test('with a negative height (-1) should throw an error', () => {
+  test('with a negative height [-1] should throw an error', () => {
     expect(() => {
       new Grid(10, -1)
     }).toThrow(new Error(ERRORS.GRID_NO_SMALLER_1))

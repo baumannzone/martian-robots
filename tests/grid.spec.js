@@ -1,4 +1,3 @@
-/* eslint-disable no-new */
 const Grid = require('../src/app/grid.js')
 const { ERRORS } = require('../src/constants')
 

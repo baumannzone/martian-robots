@@ -27,10 +27,10 @@ describe('A Grid', () => {
     }).toThrow(new Error(ERRORS.GRID_NO_SMALLER_1))
   })
 
-  test('with the width and height equal to 0 throw an error', () => {
+  test('with the width and height equal to 0, it works', () => {
     expect(() => {
       new Grid(0, 0)
-    }).toThrow(new Error(ERRORS.GRID_NO_SMALLER_1))
+    }).not.toThrow(new Error(ERRORS.GRID_NO_SMALLER_1))
   })
 
   test('with the width and height greater than 50 should throw an error', () => {

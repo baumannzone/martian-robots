@@ -41,7 +41,7 @@ class Mars {
     let output = ''
     robots.map((robotObj, idx) => {
       const robot = new Robot(grid)
-      robot.setStartingPosition(robotObj.startingPosition)
+      robot.setPosition(robotObj.startingPosition)
       const move = robot.move(robotObj.instructions)
       output += (output.length > 0 ? NEWLINE : EMPTY_STRING) + move
     })

@@ -6,7 +6,7 @@ class Grid {
       throw new Error(ERRORS.GRID_NO_GREATER_50)
     }
 
-    if (width <= 0 || height <= 0) {
+    if (width < 0 || height < 0) {
       throw new Error(ERRORS.GRID_NO_SMALLER_1)
     }
 

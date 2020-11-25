@@ -15,20 +15,28 @@ const left = {
 }
 
 class Robot {
-  constructor (grid) {
+  constructor(grid) {
     this.grid = grid
     this.position = new Position()
     this.isLost = false
   }
 
-  setStartingPosition (startingPosition) {
+  getPosition() {
+    return {
+      x: this.position.x,
+      y: this.position.y,
+      orientation: this.position.orientation
+    }
+  }
+
+  setPosition(startingPosition) {
     const [x, y, orientation] = startingPosition.split(BLANK_SPACE)
     this.position.x = x
     this.position.y = y
     this.position.orientation = orientation
   }
 
-  move (instructions) {
+  move(instructions) {
     for (let i = 0; i < instructions.length; i++) {
       if (this.isLost) {
         break
@@ -54,7 +62,7 @@ class Robot {
     return `${this.position.x} ${this.position.y} ${this.position.orientation}${this.isLost ? ' LOST' : ''}`
   }
 
-  moveForward () {
+  moveForward() {
     const initialPosition = { x: this.position.x, y: this.position.y, orientation: this.position.orientation }
 
     if (this.isLost || this.grid.positionIsForbidden(initialPosition)) {
@@ -82,11 +90,11 @@ class Robot {
     }
   }
 
-  turnRight () {
+  turnRight() {
     this.position.orientation = right[this.position.orientation]
   }
 
-  turnLeft () {
+  turnLeft() {
     this.position.orientation = left[this.position.orientation]
   }
 }

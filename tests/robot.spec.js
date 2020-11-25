@@ -29,6 +29,14 @@ describe('A new robot is created in a 2x2 Grid', () => {
     expect(robot.isLost).toBe(false)
   })
 
+  test('robot can return its position', () => {
+    const grid = new Grid()
+    const robot = new Robot(grid)
+    const expectedPosition = { orientation: "N", x: 0, y: 0 }
+
+    expect(robot.getPosition()).toMatchObject(expectedPosition)
+  })
+
   test('robot can turn left to face West', () => {
     const robot = new Robot(grid)
 
@@ -246,5 +254,19 @@ describe('In a Grid of 1x1 (height = 0, length = 0) and two robots', () => {
     const positionOutput = robot2.getPosition()
 
     expect(positionOutput).toMatchObject(expectedPosition)
+  })
+
+  test('when the robot is lost, it cancels all its pending moves', () => {
+    const grid = new Grid()
+    const robot = new Robot(grid)
+    const moveForward = jest.spyOn(robot, 'moveForward')
+    const turnLeft = jest.spyOn(robot, 'turnLeft')
+    const turnRight = jest.spyOn(robot, 'turnRight')
+
+    robot.move('FRL')
+
+    expect(moveForward).toBeCalledTimes(1)
+    expect(turnLeft).toBeCalledTimes(0)
+    expect(turnRight).toBeCalledTimes(0)
   })
 })
